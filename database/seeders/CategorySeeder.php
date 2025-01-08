@@ -68,7 +68,7 @@ class CategorySeeder extends Seeder
         $lang = Lang::where('code', 'en')->first();
         $categories = Category::all();
         foreach ($categories as $category) {
-            $category->langs()->attach($lang, ['name' => $category->name]);
+            $category->langs()->attach($lang, ['name' => $category->name ,'created_at' => now(), 'updated_at' => now()]);
         }
         
 

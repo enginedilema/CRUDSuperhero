@@ -2,17 +2,41 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Class Lang
+ *
+ * @property $id
+ * @property $code
+ * @property $name
+ * @property $created_at
+ * @property $updated_at
+ *
+ * @property CategoryLang[] $categoryLangs
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Lang extends Model
 {
-    /** @use HasFactory<\Database\Factories\LangFactory> */
-    use HasFactory;
+    
+    protected $perPage = 20;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = ['code', 'name'];
 
-    public function categories()
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories() : BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
+    
 }
